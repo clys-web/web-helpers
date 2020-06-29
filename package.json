@@ -1,0 +1,24 @@
+{
+  "name": "nightnya-web-helpers",
+  "description": "",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "src/index.js",
+  "url": "https://gitee.com/clys_node/common.utils",
+  "keywords": [
+    "helpers"
+  ],
+  "pushOption": {
+    "main": "index.js"
+  },
+  "scripts": {
+    "init": "yarn",
+    "upgradeLatest": "yarn upgrade-interactive --latest",
+    "push": "npm publish"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "nightnya-common-utils": "^1.3.2"
+  },
+  "devDependencies": {}
+}
