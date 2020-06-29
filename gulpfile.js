@@ -1,4 +1,7 @@
 const {src, dest, series} = require('gulp');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const rename = require("gulp-rename");
 const through2 = require('through2');
 const del = require('del');
 const {spawn} = require('child_process');
@@ -31,8 +34,17 @@ const runCmd = (cmd, param, options = {}) => {
 
 const compile = () =>
   src('src/**')
+    .pipe(babel({
+      presets: ['@babel/env'],
+      plugins: ['@babel/plugin-proposal-class-properties']
+    }))
+    // .pipe(uglify())
     .pipe(dest('dist'));
 
+const webpack = async (cb) => {
+  await runCmd('npx', ['webpack', "--mode=production"]);
+  cb();
+};
 
 const package_js_ver = (cb) => {
   let json = JSON.parse(fs.readFileSync('package.json', 'utf8'));

@@ -3,6 +3,15 @@ const Objs = require('nightnya-common-utils/Objs');
 
 const privateKey = Symbol();
 
+/**
+ *
+ * @param {string} baseURL 基础url
+ * @param {number} timeout 请求超时时间
+ * @param {{}} headers 附加请求头
+ * @param {function} headerFn 请求前处理请求头
+ * @param {Function} dataFn 请求前处理参数
+ * @param {{string:Array<{f:function,r:function}>}} interceptors 拦截器 reqBefore|reqAfter|resBefore|resAfter:[{f:onFulfilled,r:onRejected}]
+ */
 class Apier {
   static REQUEST_TYPE_CONFIG = {
     'delete': {post: false}, 'get': {post: false}, 'head': {post: false}, 'options': {post: false},
@@ -18,7 +27,6 @@ class Apier {
 
   constructor({
                 baseURL = '/api',
-                resNoPromptStatus = [],
                 timeout = 30000,
                 headers = {},
                 headerFn,
@@ -36,7 +44,6 @@ class Apier {
       headerFn,
       dataFn,
       interceptors,
-      resNoPromptStatus
     };
     privates.bindInterceptors();
   }
