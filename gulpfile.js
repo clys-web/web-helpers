@@ -32,8 +32,17 @@ const runCmd = (cmd, param, options = {}) => {
   })
 };
 
+const types = () =>
+  src(['src/types/**'])
+    // .pipe(babel({
+    //   presets: ['@babel/env'],
+    //   plugins: ['@babel/plugin-proposal-class-properties']
+    // }))
+    // .pipe(uglify())
+    .pipe(dest('dist/types'));
+
 const compile = () =>
-  src('src/**')
+  src(['src/**', '!src/types/**'])
     .pipe(babel({
       presets: ['@babel/env'],
       plugins: ['@babel/plugin-proposal-class-properties']
@@ -69,6 +78,7 @@ const package_js = () =>
           version: getVal('version') || "1.0.0",
           license: getVal('license') || "UNLICENSED",
           main: getVal('main'),
+          typings: getVal('typings'),
           dependencies: getVal('dependencies'),
           keywords
         };
@@ -76,7 +86,7 @@ const package_js = () =>
         if (publishConfig) {
           json.publishConfig = publishConfig;
         }
-        file.contents = Buffer.from(JSON.stringify(json))
+        file.contents = Buffer.from(JSON.stringify(json, null, 2))
       }
       cb(null, file);
     }))
@@ -89,7 +99,7 @@ const publish = async (cb) => {
   cb();
 };
 
-const build = series(del_dist, package_js_ver, package_js, compile);
+const build = series(del_dist, package_js_ver, package_js, compile, types);
 
 exports.publish = series(build, publish);
 exports.build = build;
