@@ -9,7 +9,8 @@
     "helpers"
   ],
   "pushOption": {
-    "main": "index.js"
+    "main": "index.js",
+    "typings": "types/index.d.ts"
   },
   "scripts": {
     "init": "yarn",

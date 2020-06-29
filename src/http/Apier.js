@@ -9,7 +9,7 @@ const privateKey = Symbol();
  * @param {number} timeout 请求超时时间
  * @param {{}} headers 附加请求头
  * @param {function} headerFn 请求前处理请求头
- * @param {Function} dataFn 请求前处理参数
+ * @param {function} dataFn 请求前处理参数
  * @param {{string:Array<{f:function,r:function}>}} interceptors 拦截器 reqBefore|reqAfter|resBefore|resAfter:[{f:onFulfilled,r:onRejected}]
  */
 class Apier {
