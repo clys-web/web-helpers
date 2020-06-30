@@ -1,10 +1,10 @@
 {
   "name": "nightnya-web-helpers",
   "description": "",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "license": "MIT",
   "main": "src/index.js",
-  "url": "https://gitee.com/clys_node/common.utils",
+  "url": "https://github.com/clys-web/web-helpers",
   "keywords": [
     "helpers"
   ],

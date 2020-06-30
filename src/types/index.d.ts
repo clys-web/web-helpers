@@ -1,5 +1,5 @@
-export * from './web-helpers';
+export * from './webHelpers';
 
-import * as webHelpers from './web-helpers';
+import * as webHelpers from './webHelpers';
 
 export default webHelpers;
