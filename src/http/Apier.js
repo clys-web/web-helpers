@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Objs from 'nightnya-common-utils/Objs';
+import {Objs} from 'nightnya-common-utils';
 
 const privateKey = Symbol();
 
@@ -8,14 +8,14 @@ export const Apier = class Apier {
     'delete': {post: false}, 'get': {post: false}, 'head': {post: false}, 'options': {post: false},
     'post': {post: true}, 'put': {post: true}, 'patch': {post: true}
   };
-
+  
   static DEFAULT_CONFIG = JSON.stringify({
     headers: {
       'If-Modified-Since': 0,
       'Cache-Control': 'no-cache'
     }
   });
-
+  
   constructor({
                 baseURL = '/api',
                 timeout = 30000,
@@ -38,8 +38,8 @@ export const Apier = class Apier {
     };
     privates.bindInterceptors();
   }
-
-
+  
+  
   send = (url, data, method = 'get') => this[privateKey].instance.request({
     url,
     method,
@@ -53,8 +53,8 @@ export const Apier = class Apier {
   post = (url, data) => this.send(url, data, 'post');
   put = (url, data) => this.send(url, data, 'put');
   patch = (url, data) => this.send(url, data, 'patch');
-
-
+  
+  
   [privateKey] = {
     instance: null,
     config: null,
@@ -66,7 +66,7 @@ export const Apier = class Apier {
     reqHandleDataFn(req) {
       const config = this.config || {};
       if (!config.dataFn) return;
-
+      
       let data, dType, pType;
       if (req.params) {
         const paramsType = typeof req.params;
